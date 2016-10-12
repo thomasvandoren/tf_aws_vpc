@@ -49,6 +49,10 @@ resource "aws_subnet" "private" {
   tags {
     Name = "${var.name}-private"
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_subnet" "public" {
@@ -62,6 +66,10 @@ resource "aws_subnet" "public" {
   }
 
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_route_table_association" "private" {
